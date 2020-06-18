@@ -1,0 +1,11 @@
+import urllib3, requests, json
+
+# NOTE: generate iam_token and retrieve ml_instance_id based on provided documentation	
+header = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + iam_token, 'ML-Instance-ID': ml_instance_id}
+
+# NOTE: manually define and pass the array(s) of values to be scored in the next line
+payload_scoring = {"input_data": [{"fields": ["Country", "Year", "Status", "Adult Mortality", "infant deaths", "Alcohol", "percentage expenditure", "Hepatitis B", "Measles ", " BMI ", "under-five deaths ", "Polio", "Total expenditure", "Diphtheria ", " HIV/AIDS", "GDP", "Population", " thinness  1-19 years", " thinness 5-9 years", "Income composition of resources", "Schooling"], "values": [array_of_values_to_be_scored, another_array_of_values_to_be_scored]}]}
+
+response_scoring = requests.post('https://eu-gb.ml.cloud.ibm.com/v4/deployments/60168701-f0e6-409c-b7ba-aef55a6edc38/predictions', json=payload_scoring, headers=header)
+print("Scoring response")
+print(json.loads(response_scoring.text))
